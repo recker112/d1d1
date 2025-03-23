@@ -1,85 +1,45 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import MenuBox from "./menu/MenuBox";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import Name from "./components/Name";
 import Dydy from "./components/Dydy";
+import useThemeConf from "./hooks/useThemeConf";
+
+import musIntro from "./music/mus_intro.mp3";
+import sfxButton from "./music/sfx_buttons.wav";
 
 function App() {
+  const themeConfig = useThemeConf();
   const [view, setView] = useState("menu");
   const [isHer, setIsHer] = useState(false);
+  const [mainSong] = useState(new Audio(musIntro));
+  const [buttonSfx] = useState(new Audio(sfxButton));
+  const [volume, setVolume] = useState(50);
+  const [sfx, setSfx] = useState(50);
 
-  const themeConfig = useMemo(
-    () =>
-      createTheme({
-        typography: {
-          fontFamily: ["SF Pixelate", "sans-serif", "Noto Color Emoji"].join(
-            ","
-          ),
-        },
-        palette: {
-          mode: "dark",
-          primary: {
-            main: "#FFC107", // Amarillo
-          },
-          secondary: {
-            main: "#c41826", // Rojo que combina con amarillo
-          },
-          background: {
-            default: "#000", // Fondo negro
-            paper: "#1c1c1c",
-          },
-          text: {
-            primary: "#fff",
-            secondary: "#a0a2a6",
-          },
-        },
-        components: {
-          MuiPaper: {
-            styleOverrides: {
-              root: {
-                backgroundImage: "none",
-              },
-            },
-          },
-          MuiStepIcon: {
-            styleOverrides: {
-              root: {
-                fontSize: "30px",
-              },
-            },
-          },
-          MuiStepConnector: {
-            styleOverrides: {
-              root: {
-                marginLeft: "15px",
-              },
-            },
-          },
-          MuiButton: {
-            styleOverrides: {
-              root: {
-                boxShadow: "none",
-                textTransform: "none",
-                fontSize: 16,
-                lineHeight: 1.5,
-                fontFamily: ["SF Pixelate", "sans-serif"].join(","),
-                "&:hover": {
-                  boxShadow: "none",
-                },
-              },
-            },
-          },
-        },
-      }),
-    []
-  );
+  const handleVolumeChange = (event, newValue) => {
+    setVolume(newValue);
+    mainSong.volume = newValue / 100;
+  };
+
+  const handleSfxChange = (event, newValue) => {
+    setSfx(newValue);
+    buttonSfx.play();
+    buttonSfx.volume = newValue / 100;
+  };
+
+  useEffect(() => {
+    mainSong.loop = true;
+    mainSong.volume = volume / 100; // Ajusta el volumen inicial
+    mainSong.play();
+  }, [])
 
   return (
     <ThemeProvider theme={themeConfig}>
       <CssBaseline />
       {view === "menu" && <MenuBox setView={setView} />}
       <Name setIsHer={setIsHer} />
-      <Dydy isHer={isHer} />
+      <Dydy isHer={isHer} handleVolumeChange={handleVolumeChange} volume={volume} handleSfxChange={handleSfxChange} sfx={sfx} />
     </ThemeProvider>
   );
 }
