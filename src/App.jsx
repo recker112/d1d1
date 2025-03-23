@@ -4,9 +4,11 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Name from "./components/Name";
 import Dydy from "./components/Dydy";
 import useThemeConf from "./hooks/useThemeConf";
+import SiBox from "./si/SiBox";
 
 import musIntro from "./music/mus_intro.mp3";
 import sfxButton from "./music/sfx_buttons.wav";
+import NoBox from "./no/NoBox";
 
 function App() {
   const themeConfig = useThemeConf();
@@ -14,8 +16,8 @@ function App() {
   const [isHer, setIsHer] = useState(false);
   const [mainSong] = useState(new Audio(musIntro));
   const [buttonSfx] = useState(new Audio(sfxButton));
-  const [volume, setVolume] = useState(50);
-  const [sfx, setSfx] = useState(50);
+  const [volume, setVolume] = useState(30);
+  const [sfx, setSfx] = useState(30);
 
   const handleVolumeChange = (event, newValue) => {
     setVolume(newValue);
@@ -37,7 +39,10 @@ function App() {
   return (
     <ThemeProvider theme={themeConfig}>
       <CssBaseline />
+      DEBUG: {view}
       {view === "menu" && <MenuBox setView={setView} buttonSfx={buttonSfx} mainSong={mainSong} />}
+      {view === "si" && <SiBox volume={volume} sfx={sfx} />}
+      {view === "no" && <NoBox volume={volume} sfx={sfx} />}
       <Name setIsHer={setIsHer} />
       <Dydy isHer={isHer} handleVolumeChange={handleVolumeChange} volume={volume} handleSfxChange={handleSfxChange} sfx={sfx} />
     </ThemeProvider>

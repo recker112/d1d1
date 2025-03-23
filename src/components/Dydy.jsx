@@ -69,7 +69,7 @@ export default function Dydy({ isHer, handleVolumeChange, volume, handleSfxChang
         </Grid>
         <br />
         <DialogContentText>
-          Si puedes, usa un PC...
+          Los controles son WASD, no uses las flechas, no harán nada...
         </DialogContentText>
         <br />
         {isHer.is && (

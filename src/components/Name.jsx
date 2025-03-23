@@ -21,7 +21,6 @@ export default function Name({ setIsHer }) {
       localStorage.setItem('d1d1-names', JSON.stringify(existingNames));
     }
 
-    console.log(is);
     setIsHer({ is });
   }
 

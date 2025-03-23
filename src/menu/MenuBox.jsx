@@ -21,7 +21,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
         mainSong.pause();
         clearInterval(fadeOutInterval);
       }
-    }, 200);
+    }, 100);
 
     setTimeout(() => {
       setView(view);
@@ -58,7 +58,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 2 }}
-              onClick={() => handleView("si")}
+              onClick={() => handleView("no")}
               onHoverStart={handleSound}
             >
               No
@@ -77,7 +77,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 2 }}
-              onClick={() => handleView("no")}
+              onClick={() => handleView("si")}
               onHoverStart={handleSound}
             >
               Si
