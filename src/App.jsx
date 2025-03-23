@@ -34,7 +34,7 @@ function App() {
     mainSong.loop = true;
     mainSong.volume = volume / 100; // Ajusta el volumen inicial
     mainSong.play();
-  }, [])
+  }, []);
 
   return (
     <ThemeProvider theme={themeConfig}>

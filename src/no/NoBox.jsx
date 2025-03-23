@@ -137,6 +137,7 @@ export default function NoBox({ volume, sfx }) {
 
         if (isColliding) {
           if (circle.type === 'special') {
+            setCollisionCount(prevCount => prevCount - 2);
             // Señalar que se deben eliminar los círculos que persiguen
             removeChasers = true;
             return null;
