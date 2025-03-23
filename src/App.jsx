@@ -1,35 +1,87 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useMemo, useState } from "react";
+import MenuBox from "./menu/MenuBox";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import Name from "./components/Name";
+import Dydy from "./components/Dydy";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [view, setView] = useState("menu");
+  const [isHer, setIsHer] = useState(false);
+
+  const themeConfig = useMemo(
+    () =>
+      createTheme({
+        typography: {
+          fontFamily: ["SF Pixelate", "sans-serif", "Noto Color Emoji"].join(
+            ","
+          ),
+        },
+        palette: {
+          mode: "dark",
+          primary: {
+            main: "#FFC107", // Amarillo
+          },
+          secondary: {
+            main: "#c41826", // Rojo que combina con amarillo
+          },
+          background: {
+            default: "#000", // Fondo negro
+            paper: "#1c1c1c",
+          },
+          text: {
+            primary: "#fff",
+            secondary: "#a0a2a6",
+          },
+        },
+        components: {
+          MuiPaper: {
+            styleOverrides: {
+              root: {
+                backgroundImage: "none",
+              },
+            },
+          },
+          MuiStepIcon: {
+            styleOverrides: {
+              root: {
+                fontSize: "30px",
+              },
+            },
+          },
+          MuiStepConnector: {
+            styleOverrides: {
+              root: {
+                marginLeft: "15px",
+              },
+            },
+          },
+          MuiButton: {
+            styleOverrides: {
+              root: {
+                boxShadow: "none",
+                textTransform: "none",
+                fontSize: 16,
+                lineHeight: 1.5,
+                fontFamily: ["SF Pixelate", "sans-serif"].join(","),
+                "&:hover": {
+                  boxShadow: "none",
+                },
+              },
+            },
+          },
+        },
+      }),
+    []
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ThemeProvider theme={themeConfig}>
+      <CssBaseline />
+      {view === "menu" && <MenuBox setView={setView} />}
+      <Name setIsHer={setIsHer} />
+      <Dydy isHer={isHer} />
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
