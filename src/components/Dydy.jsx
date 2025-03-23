@@ -68,6 +68,10 @@ export default function Dydy({ isHer, handleVolumeChange, volume, handleSfxChang
           </Grid>
         </Grid>
         <br />
+        <DialogContentText>
+          Si puedes, usa un PC...
+        </DialogContentText>
+        <br />
         {isHer.is && (
           <DialogContentText>
             <Box component="span" sx={{ color: "red" }}>

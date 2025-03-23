@@ -37,7 +37,7 @@ function App() {
   return (
     <ThemeProvider theme={themeConfig}>
       <CssBaseline />
-      {view === "menu" && <MenuBox setView={setView} />}
+      {view === "menu" && <MenuBox setView={setView} buttonSfx={buttonSfx} mainSong={mainSong} />}
       <Name setIsHer={setIsHer} />
       <Dydy isHer={isHer} handleVolumeChange={handleVolumeChange} volume={volume} handleSfxChange={handleSfxChange} sfx={sfx} />
     </ThemeProvider>

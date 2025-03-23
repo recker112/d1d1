@@ -3,12 +3,26 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-export default function MenuBox({ setView }) {
+export default function MenuBox({ setView, buttonSfx, mainSong }) {
   const [desition, setDesition] = useState(false);
+
+  const handleSound = () => {
+    buttonSfx.play();
+  };
 
   const handleView = (view) => {
     if (desition) return;
     setDesition(true);
+    const fadeOutInterval = setInterval(() => {
+      if (mainSong.volume > 0.1) {
+        mainSong.volume -= 0.1;
+      } else {
+        mainSong.volume = 0;
+        mainSong.pause();
+        clearInterval(fadeOutInterval);
+      }
+    }, 200);
+
     setTimeout(() => {
       setView(view);
     }, 2000);
@@ -35,13 +49,17 @@ export default function MenuBox({ setView }) {
         <Grid>
           <Typography
             variant="h3"
-            sx={{ color: desition ? "text.disabled" : "error.main", cursor: "pointer" }}
+            sx={{
+              color: desition ? "text.disabled" : "error.main",
+              cursor: "pointer",
+            }}
           >
             <motion.div
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 2 }}
               onClick={() => handleView("si")}
+              onHoverStart={handleSound}
             >
               No
             </motion.div>
@@ -50,13 +68,17 @@ export default function MenuBox({ setView }) {
         <Grid>
           <Typography
             variant="h3"
-            sx={{ color: desition ? "text.disabled" : "primary.main", cursor: "pointer" }}
+            sx={{
+              color: desition ? "text.disabled" : "primary.main",
+              cursor: "pointer",
+            }}
           >
             <motion.div
               initial={{ scale: 1 }}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 2 }}
               onClick={() => handleView("no")}
+              onHoverStart={handleSound}
             >
               Si
             </motion.div>
