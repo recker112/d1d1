@@ -20,7 +20,7 @@ export default function useThemeConf() {
           },
           background: {
             default: "#000", // Fondo negro
-            paper: "#1c1c1c",
+            paper: "#111111",
           },
           text: {
             primary: "#fff",
