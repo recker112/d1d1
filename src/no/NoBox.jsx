@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import musMadness from "../music/mus_madness.wav";
 import musPreMadness from "../music/mus_madness_pre.wav";
 import sfxDamage from "../music/sfx_damage.wav";
+import sfxHealth from "../music/sfx_health.wav";
 
 export default function NoBox({ volume, sfx }) {
   const [madnessSong] = useState(new Audio(musMadness));
   const [introSong] = useState(new Audio(musPreMadness));
-  const [damageSong] = useState(new Audio(sfxDamage));
+  const [damageSfx] = useState(new Audio(sfxDamage));
+  const [healthSfx] = useState(new Audio(sfxHealth));
   const [position, setPosition] = useState({ top: 50, left: 50 });
   const [circles, setCircles] = useState([]);
   const [collisionCount, setCollisionCount] = useState(0);
@@ -15,6 +17,7 @@ export default function NoBox({ volume, sfx }) {
   const arrowRef = useRef(null);
   const intervalRef = useRef(null);
   const keysPressed = useRef({});
+  const circleIdRef = useRef(0); // Contador para generar claves únicas
 
   useEffect(() => {
     // Generar círculos aleatorios
@@ -113,7 +116,13 @@ export default function NoBox({ volume, sfx }) {
           circleLeft = Math.max(0, Math.min(90, circleLeft));
         }
 
-        const circleRect = {
+        // Ajustar el tamaño del rectángulo de colisión del círculo especial
+        const circleRect = circle.type === 'special' ? {
+          top: (circleTop / 100) * containerRect.height + containerRect.top - 5,
+          left: (circleLeft / 100) * containerRect.width + containerRect.left - 5,
+          right: (circleLeft / 100) * containerRect.width + containerRect.left + 25,
+          bottom: (circleTop / 100) * containerRect.height + containerRect.top + 25,
+        } : {
           top: (circleTop / 100) * containerRect.height + containerRect.top + 2,
           left: (circleLeft / 100) * containerRect.width + containerRect.left + 2,
           right: (circleLeft / 100) * containerRect.width + containerRect.left + 18,
@@ -137,14 +146,17 @@ export default function NoBox({ volume, sfx }) {
 
         if (isColliding) {
           if (circle.type === 'special') {
-            setCollisionCount(prevCount => prevCount - 2);
+            setCollisionCount(prevCount => prevCount > 2 ? prevCount - 2 : prevCount);
+            healthSfx.play();
+            healthSfx.volume = sfx / 100;
+
             // Señalar que se deben eliminar los círculos que persiguen
             removeChasers = true;
             return null;
           } else {
             setCollisionCount(prevCount => prevCount + 3);
-            damageSong.play();
-            damageSong.volume = sfx / 100;
+            damageSfx.play();
+            damageSfx.volume = sfx / 100;
 
 
             // Generar una nueva bola en una posición aleatoria
@@ -248,7 +260,6 @@ export default function NoBox({ volume, sfx }) {
         border: '5px solid white',
       }}
     >
-      {collisionCount}
       <div
         ref={arrowRef}
         style={{
