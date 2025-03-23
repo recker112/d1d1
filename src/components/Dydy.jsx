@@ -90,7 +90,7 @@ export default function Dydy({
           </Grid>
           <Grid container alignItems="center" spacing={1} size={10}>
             <Grid>
-              <VolumeDownIcon />
+              <MusicOffIcon />
             </Grid>
             <Grid>
               <Slider
@@ -103,7 +103,7 @@ export default function Dydy({
               />
             </Grid>
             <Grid>
-              <VolumeUpIcon />
+              <MusicNoteIcon />
             </Grid>
           </Grid>
           <Grid size={2}>
@@ -111,7 +111,7 @@ export default function Dydy({
           </Grid>
           <Grid container alignItems="center" spacing={1} size={10}>
             <Grid>
-              <MusicOffIcon />
+              <VolumeDownIcon />
             </Grid>
             <Slider
               value={sfx}
@@ -124,7 +124,7 @@ export default function Dydy({
               sx={{ width: 300 }}
             />
             <Grid>
-              <MusicNoteIcon />
+              <VolumeUpIcon />
             </Grid>
           </Grid>
         </Grid>
