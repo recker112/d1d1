@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -10,10 +11,23 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeDownIcon from "@mui/icons-material/VolumeDown";
+import MusicOffIcon from "@mui/icons-material/MusicOff";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import DoorBackIcon from "@mui/icons-material/DoorBack";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+
+import { motion } from "motion/react";
 import { shakeText } from "./Textos";
 
-export default function Dydy({ isHer, handleVolumeChange, volume, handleSfxChange, sfx }) {
+export default function Dydy({
+  isHer,
+  handleVolumeChange,
+  volume,
+  handleSfxChange,
+  sfx,
+}) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -29,6 +43,39 @@ export default function Dydy({ isHer, handleVolumeChange, volume, handleSfxChang
   return (
     <Dialog open={open} fullWidth>
       <DialogTitle>Ten en cuenta lo siguiente</DialogTitle>
+      {isHer.is ? (
+        <Box
+          sx={(theme) => ({
+            position: "absolute",
+            right: 16,
+            top: 16,
+            color: theme.palette.grey[500],
+          })}
+        >
+          <motion.div
+            animate={{ scale: [1, 1.5, 1.1, 1.5, 1.1, 1] }}
+            transition={{ duration: 0.5 }}
+          >
+            <MeetingRoomIcon />
+          </motion.div>
+        </Box>
+      ) : (
+        <Box
+          sx={(theme) => ({
+            position: "absolute",
+            right: 16,
+            top: 16,
+            color: theme.palette.grey[500],
+          })}
+        >
+          <motion.div
+            animate={{ x: [0, 5, -5, 5, -5, 0] }}
+            transition={{ duration: 0.5 }}
+          >
+            <DoorBackIcon />
+          </motion.div>
+        </Box>
+      )}
       <DialogContent>
         <DialogContentText>
           Usa audífonos, así podrás escuchar todo mejor.
@@ -41,20 +88,31 @@ export default function Dydy({ isHer, handleVolumeChange, volume, handleSfxChang
           <Grid size={2}>
             <Typography variant="caption">Música</Typography>
           </Grid>
-          <Grid size={10}>
-            <Slider
-              value={volume}
-              onChange={handleVolumeChange}
-              aria-labelledby="continuous-slider"
-              min={0}
-              max={100}
-              sx={{maxWidth: 300}}
-            />
+          <Grid container alignItems="center" spacing={1} size={10}>
+            <Grid>
+              <VolumeDownIcon />
+            </Grid>
+            <Grid>
+              <Slider
+                value={volume}
+                onChange={handleVolumeChange}
+                aria-labelledby="continuous-slider"
+                min={0}
+                max={100}
+                sx={{ width: 300 }}
+              />
+            </Grid>
+            <Grid>
+              <VolumeUpIcon />
+            </Grid>
           </Grid>
           <Grid size={2}>
             <Typography variant="caption">Efectos</Typography>
           </Grid>
-          <Grid size={10}>
+          <Grid container alignItems="center" spacing={1} size={10}>
+            <Grid>
+              <MusicOffIcon />
+            </Grid>
             <Slider
               value={sfx}
               onChange={handleSfxChange}
@@ -63,8 +121,11 @@ export default function Dydy({ isHer, handleVolumeChange, volume, handleSfxChang
               max={100}
               step={10}
               marks
-              sx={{maxWidth: 300}}
+              sx={{ width: 300 }}
             />
+            <Grid>
+              <MusicNoteIcon />
+            </Grid>
           </Grid>
         </Grid>
         <br />

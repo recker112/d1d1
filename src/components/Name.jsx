@@ -1,8 +1,13 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import { useState } from 'react'
 
-export default function Name({ setIsHer }) {
+import sfxUnlock from "../music/sfx_unlock.wav";
+import sfxLock from "../music/sfx_lock.wav";
+
+export default function Name({ setIsHer, sfx }) {
   const [open, setOpen] = useState(true);
+  const [unlockSfx] = useState(new Audio(sfxUnlock));
+  const [lockSfx] = useState(new Audio(sfxLock));
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +18,11 @@ export default function Name({ setIsHer }) {
     let is = false;
     if (name === 'dydy' || name === 'wendy') {
       is = true;
+      unlockSfx.play();
+      unlockSfx.volume = sfx / 100;
+    } else {
+      lockSfx.play();
+      lockSfx.volume = sfx / 100;
     }
 
     const existingNames = JSON.parse(localStorage.getItem('d1d1-names') || '[]');

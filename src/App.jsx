@@ -43,7 +43,7 @@ function App() {
       {view === "menu" && <MenuBox setView={setView} buttonSfx={buttonSfx} mainSong={mainSong} />}
       {view === "si" && <SiBox volume={volume} sfx={sfx} />}
       {view === "no" && <NoBox volume={volume} sfx={sfx} />}
-      <Name setIsHer={setIsHer} />
+      <Name setIsHer={setIsHer} sfx={sfx} />
       <Dydy isHer={isHer} handleVolumeChange={handleVolumeChange} volume={volume} handleSfxChange={handleSfxChange} sfx={sfx} />
     </ThemeProvider>
   );

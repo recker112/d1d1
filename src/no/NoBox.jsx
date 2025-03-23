@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import musMadness from "../music/mus_madness.mp3";
+import musMadness from "../music/mus_madness.wav";
+import musPreMadness from "../music/mus_madness_pre.wav";
 import sfxDamage from "../music/sfx_damage.wav";
 
 export default function NoBox({ volume, sfx }) {
   const [madnessSong] = useState(new Audio(musMadness));
+  const [introSong] = useState(new Audio(musPreMadness));
   const [damageSong] = useState(new Audio(sfxDamage));
   const [position, setPosition] = useState({ top: 50, left: 50 });
   const [circles, setCircles] = useState([]);
@@ -215,14 +217,24 @@ export default function NoBox({ volume, sfx }) {
   }, [position, circles]);
 
   useEffect(() => {
-    madnessSong.play();
-    madnessSong.loop = true;
-    madnessSong.volume = volume / 100;
+    // Reproducir el sonido de introducción
+    introSong.play();
+    introSong.volume = volume / 100;
+
+    // Cuando el sonido de introducción termine, reproducir madnessSong en bucle
+    introSong.onended = () => {
+      setTimeout(() => {
+        madnessSong.play();
+        madnessSong.loop = true;
+        madnessSong.volume = volume / 100;
+      }, 2000);
+    };
 
     return () => {
-      madnessSong?.pause()
-    }
-  }, [madnessSong, volume]);
+      introSong?.pause();
+      madnessSong?.pause();
+    };
+  }, [introSong, madnessSong, volume]);
 
   return (
     <div

@@ -21,7 +21,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
         mainSong.pause();
         clearInterval(fadeOutInterval);
       }
-    }, 100);
+    }, 150);
 
     setTimeout(() => {
       setView(view);
