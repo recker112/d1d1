@@ -84,6 +84,24 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
             </motion.div>
           </Typography>
         </Grid>
+        <Grid container justifyContent='center' size={12}>
+          <Typography
+            variant="h3"
+            sx={{
+              color: desition ? "text.disabled" : "primary.main",
+              cursor: "pointer",
+            }}
+          >
+            <motion.div
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 2 }}
+              onHoverStart={handleSound}
+            >
+              Finales
+            </motion.div>
+          </Typography>
+        </Grid>
       </Grid>
     </Grid>
   );
