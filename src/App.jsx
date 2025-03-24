@@ -16,8 +16,8 @@ function App() {
   const [isHer, setIsHer] = useState(false);
   const [mainSong] = useState(new Audio(musIntro));
   const [buttonSfx] = useState(new Audio(sfxButton));
-  const [volume, setVolume] = useState(30);
-  const [sfx, setSfx] = useState(30);
+  const [volume, setVolume] = useState(10);
+  const [sfx, setSfx] = useState(10);
 
   const handleVolumeChange = (event, newValue) => {
     setVolume(newValue);

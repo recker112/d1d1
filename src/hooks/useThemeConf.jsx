@@ -63,6 +63,20 @@ export default function useThemeConf() {
               },
             },
           },
+          MuiTooltip: {
+            styleOverrides: {
+              tooltip: {
+                backgroundColor: "#fff",
+                color: "#000",
+                fontFamily: "SF Pixelate, sans-serif",
+                border: "1px solid #000",
+                boxShadow: "none",
+              },
+              arrow: {
+                color: "#fff",
+              },
+            },
+          },
         },
       }),
     []
