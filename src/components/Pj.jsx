@@ -57,7 +57,7 @@ export default function Pj({ text, sfx, setNextText }) {
         placement="left-start"
         arrow
       >
-        Pj
+        Recker
       </Tooltip>
     </div>
   );
