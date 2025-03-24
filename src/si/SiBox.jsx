@@ -8,7 +8,20 @@ import assetFlor from "../assets/flor.png";
 export default function SiBox({ volume, sfx }) {
   const [dydySong] = useState(new Audio(musDydy));
   const [nextText, setNextText] = useState(false);
+  const [textos, setTextos] = useState([
+      "Vaya, no me esperaba esa respuesta. ¿Quién lo diría? De algo sirvió resarle a esos cuadros.",
+      "¿Sabes la diferencia entre un duende y tú? Verga... Era hobbit. JA JA JA.",
+      "Solo bromeo, mira, dijiste que siempre eras espectadora, ¿verdad?",
+      "Deja que busque un momento...",
+      "¡Lo encontré!",
+      "Me constó hacerla ya que no dibujo media verga.",
+      "Me inspiré en una flor amarilla directamente de Hogwarts. Para ser más especifico, del episodio 2...",
+      "¿No me crees? Yo tampoco, pero está bonita, ¿no? (si me quedó fea ajajaajja)",
+      "¡Disfruta! No todos los días se regalan flores. Pero siempre se puede regalar algo.",
+      "Toma otra, porque puedo.",
+    ]);
   const [currentDialog, setCurrentDialog] = useState(0);
+  const [infiniteMode, setInfiniteMode] = useState(false);
   const [position1, setPosition1] = useState({
     x: window.innerWidth / 2 - 50,
     y: window.innerHeight / 2 - 50,
@@ -40,26 +53,48 @@ export default function SiBox({ volume, sfx }) {
     }
   }, [nextText]);
 
-  const textos = [
-    "Vaya, no me esperaba esa respuesta. ¿Quién lo diría? De algo sirvió resarle a esos cuadros.",
-    "¿Sabes la diferencia entre un duende y tú? Verga... Era hobbit. JA JA JA.",
-    "Solo bromeo, mira, dijiste que siempre eras espectadora, ¿verdad?",
-    "Deja que busque un momento...",
-    "¡Lo encontré!",
-    "Me constó hacerla ya que no dibujo media verga.",
-    "Me inspiré en una flor amarilla directamente de Hogwarts. Para ser más especifico, del episodio 2...",
-    "¿No me crees? Yo tampoco, pero está bonita, ¿no? (si me quedó fea ajajaajja)",
-    "¡Disfruta! No todos los días se regalan flores. Pero siempre se puede regalar algo.",
-    "Toma otra, porque puedo.",
-  ];
-
   useEffect(() => {
     dydySong.play();
 
     dydySong.volume = volume / 100;
 
     dydySong.onended = () => {
-      alert("Finish");
+      setTextos([
+        "Puedes irte cuando quieras, ¡simplemente recarga la página!",
+        "A menos que quieras seguir hablando...",
+      ]);
+      setInfiniteMode(true);
+      setCurrentDialog(0);
+
+      setTimeout(() => {
+        setTextos([
+          "Al final Halcón y Aguíla si son dos cosas distintas.",
+          "Y yo pensaba que era algo de geolocalización, AJAJAJA.",
+        ]);
+
+        setCurrentDialog(0);
+
+        setTimeout(() => {
+          setTextos([
+            "Lo gracioso es que te dije de seguir hablando y solo puedo hablando yo.",
+            "Pudiera hacer algo para que respondas... Pero creo que eso ya si sería algo más complicado aquí.",
+            "Si vieras como es esto por dentro. Es un desastre, aunque intento que esté ordenado."
+          ]);
+  
+          setCurrentDialog(0);
+
+          setTimeout(() => {
+            setTextos([
+              "Bueno, hablar y pensar ideas de conversación no es lo mio.",
+              "Ya no se me ocurre nada, aunque te puedo apostar que mañana va a llover. En eso siempre gano.",
+              "Las flores las puedes mover... Creo que ya debiste darte cuenta de eso a estas alturas.",
+              "Ahora si vacié todos los diálogos, ¡te dejo con las flores!"
+            ]);
+    
+            setCurrentDialog(0);
+          }, 35000);
+        }, 25000);
+      }, 25000);
 
       dydySong.play();
       dydySong.loop = true;
@@ -129,10 +164,10 @@ export default function SiBox({ volume, sfx }) {
   return (
     <Box sx={{ textAlign: "center" }}>
       <Pj text={textos[currentDialog]} setNextText={setNextText} sfx={sfx} />
-      {currentDialog >= 4 && (
+      {(currentDialog >= 4 || infiniteMode) && (
         <Grow in>
           <Box>
-            {currentDialog > 4 && (
+            {(currentDialog > 4 || infiniteMode) && (
               <Box
                 onMouseDown={handleMouseDown1}
                 sx={{
@@ -162,7 +197,7 @@ export default function SiBox({ volume, sfx }) {
                 />
               </Box>
             )}
-            {currentDialog > 8 && (
+            {(currentDialog > 8 || infiniteMode) && (
               <Box
                 onMouseDown={handleMouseDown2}
                 sx={{
