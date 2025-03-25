@@ -105,7 +105,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx }) {
               whileTap={{ scale: 2 }}
               onHoverStart={handleSound}
             >
-              Finales
+              Logros
             </motion.div>
           </Typography>
         </Grid>
