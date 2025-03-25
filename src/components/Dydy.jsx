@@ -85,34 +85,35 @@ export default function Dydy({
           Puede que el volumen no sea de tú agrado, ¡ajústalo!
         </DialogContentText>
         <Grid container>
-          <Grid size={2}>
+          <Grid size={{xs: 12, md: 2}}>
             <Typography variant="caption">Música</Typography>
           </Grid>
-          <Grid container alignItems="center" spacing={1} size={10}>
+          <Grid container alignItems="center" spacing={1} size={{xs: 12, md: 10}}>
             <Grid>
               <MusicOffIcon />
             </Grid>
-            <Grid>
+            <Grid size='grow'>
               <Slider
                 value={volume}
                 onChange={handleVolumeChange}
                 aria-labelledby="continuous-slider"
                 min={0}
                 max={100}
-                sx={{ width: 300 }}
+                sx={{width: '100%'}}
               />
             </Grid>
             <Grid>
               <MusicNoteIcon />
             </Grid>
           </Grid>
-          <Grid size={2}>
+          <Grid size={{xs: 12, md: 2}}>
             <Typography variant="caption">Efectos</Typography>
           </Grid>
-          <Grid container alignItems="center" spacing={1} size={10}>
+          <Grid container alignItems="center" spacing={1} size={{xs: 12, md: 10}}>
             <Grid>
               <VolumeDownIcon />
             </Grid>
+            <Grid size='grow'>
             <Slider
               value={sfx}
               onChange={handleSfxChange}
@@ -121,8 +122,9 @@ export default function Dydy({
               max={100}
               step={10}
               marks
-              sx={{ width: 300 }}
+              sx={{ width: 1/1 }}
             />
+            </Grid>
             <Grid>
               <VolumeUpIcon />
             </Grid>
