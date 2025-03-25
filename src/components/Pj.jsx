@@ -54,7 +54,7 @@ export default function Pj({ text, sfx, setNextText }) {
       <Tooltip
         open={true}
         title={text ? <Box textAlign='center' p={1.5}>{displayedText}</Box> : null}
-        placement="left-start"
+        placement="bottom"
         arrow
       >
         Recker

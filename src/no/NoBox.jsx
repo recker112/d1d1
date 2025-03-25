@@ -309,7 +309,7 @@ export default function NoBox({ volume, sfx }) {
           margin: "auto",
           width: "300px",
           height: "400px",
-          marginTop: 200,
+          marginTop: 170,
           border: "5px solid white",
         }}
       >
