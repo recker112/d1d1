@@ -113,6 +113,12 @@ export default function SiBox({ volume, sfx }) {
     };
   };
 
+  const handleTouchStart1 = (e) => {
+    dragging1.current = true;
+    const touch = e.touches[0];
+    dragStart1.current = { x: touch.clientX - position1.x, y: touch.clientY - position1.y };
+  };
+
   const handleMouseMove1 = (e) => {
     if (dragging1.current) {
       setPosition1({
@@ -122,7 +128,18 @@ export default function SiBox({ volume, sfx }) {
     }
   };
 
+  const handleTouchMove1 = (e) => {
+    if (dragging1.current) {
+      const touch = e.touches[0];
+      setPosition1({ x: touch.clientX - dragStart1.current.x, y: touch.clientY - dragStart1.current.y });
+    }
+  };
+
   const handleMouseUp1 = () => {
+    dragging1.current = false;
+  };
+
+  const handleTouchEnd1 = () => {
     dragging1.current = false;
   };
 
@@ -134,6 +151,12 @@ export default function SiBox({ volume, sfx }) {
     };
   };
 
+  const handleTouchStart2 = (e) => {
+    dragging2.current = true;
+    const touch = e.touches[0];
+    dragStart2.current = { x: touch.clientX - position2.x, y: touch.clientY - position2.y };
+  };
+
   const handleMouseMove2 = (e) => {
     if (dragging2.current) {
       setPosition2({
@@ -143,7 +166,18 @@ export default function SiBox({ volume, sfx }) {
     }
   };
 
+  const handleTouchMove2 = (e) => {
+    if (dragging2.current) {
+      const touch = e.touches[0];
+      setPosition2({ x: touch.clientX - dragStart2.current.x, y: touch.clientY - dragStart2.current.y });
+    }
+  };
+
   const handleMouseUp2 = () => {
+    dragging2.current = false;
+  };
+
+  const handleTouchEnd2 = () => {
     dragging2.current = false;
   };
 
@@ -152,12 +186,20 @@ export default function SiBox({ volume, sfx }) {
     window.addEventListener("mouseup", handleMouseUp1);
     window.addEventListener("mousemove", handleMouseMove2);
     window.addEventListener("mouseup", handleMouseUp2);
+    window.addEventListener("touchmove", handleTouchMove1);
+    window.addEventListener("touchend", handleTouchEnd1);
+    window.addEventListener("touchmove", handleTouchMove2);
+    window.addEventListener("touchend", handleTouchEnd2);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove1);
       window.removeEventListener("mouseup", handleMouseUp1);
       window.removeEventListener("mousemove", handleMouseMove2);
       window.removeEventListener("mouseup", handleMouseUp2);
+      window.removeEventListener("touchmove", handleTouchMove1);
+      window.removeEventListener("touchend", handleTouchEnd1);
+      window.removeEventListener("touchmove", handleTouchMove2);
+      window.removeEventListener("touchend", handleTouchEnd2);
     };
   }, []);
 
@@ -170,6 +212,7 @@ export default function SiBox({ volume, sfx }) {
             {(currentDialog > 4 || infiniteMode) && (
               <Box
                 onMouseDown={handleMouseDown1}
+                onTouchStart={handleTouchStart1}
                 sx={{
                   position: "absolute",
                   left: `${position1.x}px`,
@@ -200,6 +243,7 @@ export default function SiBox({ volume, sfx }) {
             {(currentDialog > 8 || infiniteMode) && (
               <Box
                 onMouseDown={handleMouseDown2}
+                onTouchStart={handleTouchStart2}
                 sx={{
                   position: "absolute",
                   left: `${position2.x}px`,

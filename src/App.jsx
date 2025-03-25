@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MenuBox from "./menu/MenuBox";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Button, CssBaseline, ThemeProvider } from "@mui/material";
 import Name from "./components/Name";
 import Dydy from "./components/Dydy";
 import useThemeConf from "./hooks/useThemeConf";
@@ -9,6 +9,7 @@ import SiBox from "./si/SiBox";
 import musIntro from "./music/mus_intro.mp3";
 import sfxButton from "./music/sfx_buttons.wav";
 import NoBox from "./no/NoBox";
+import { shakeText } from "./components/Textos";
 
 function App() {
   const themeConfig = useThemeConf();
@@ -43,7 +44,7 @@ function App() {
       <CssBaseline />
       {!audioInitialized && (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <button onClick={initializeAudio}>Play</button>
+          <Button color="secondary" onClick={initializeAudio}>{shakeText('Iniciar')}</Button>
         </div>
       )}
       {audioInitialized && (
