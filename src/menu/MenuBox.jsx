@@ -31,7 +31,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
   return (
     <Grid container justifyContent="center" sx={{ mt: 4 }} spacing={20}>
       <Grid>
-        <Typography variant="h3">
+        <Typography variant='h5'>
           <motion.div
             initial={{ scale: 1 }}
             animate={{ scale: [1.1, 1] }}

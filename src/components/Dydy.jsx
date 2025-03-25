@@ -85,45 +85,55 @@ export default function Dydy({
           Puede que el volumen no sea de tú agrado, ¡ajústalo!
         </DialogContentText>
         <Grid container>
-          <Grid size={{xs: 12, md: 2}}>
+          <Grid size={{ xs: 12, md: 2 }}>
             <Typography variant="caption">Música</Typography>
           </Grid>
-          <Grid container alignItems="center" spacing={1} size={{xs: 12, md: 10}}>
+          <Grid
+            container
+            alignItems="center"
+            spacing={1}
+            size={{ xs: 12, md: 10 }}
+          >
             <Grid>
               <MusicOffIcon />
             </Grid>
-            <Grid size='grow'>
+            <Grid size="grow">
               <Slider
                 value={volume}
                 onChange={handleVolumeChange}
                 aria-labelledby="continuous-slider"
                 min={0}
                 max={100}
-                sx={{width: '100%'}}
+                sx={{ width: "100%" }}
               />
             </Grid>
             <Grid>
               <MusicNoteIcon />
             </Grid>
           </Grid>
-          <Grid size={{xs: 12, md: 2}}>
+          <Grid size={{ xs: 12, md: 2 }}>
             <Typography variant="caption">Efectos</Typography>
           </Grid>
-          <Grid container alignItems="center" spacing={1} size={{xs: 12, md: 10}}>
+          <Grid
+            container
+            alignItems="center"
+            spacing={1}
+            size={{ xs: 12, md: 10 }}
+          >
             <Grid>
               <VolumeDownIcon />
             </Grid>
-            <Grid size='grow'>
-            <Slider
-              value={sfx}
-              onChange={handleSfxChange}
-              aria-labelledby="continuous-slider"
-              min={0}
-              max={100}
-              step={10}
-              marks
-              sx={{ width: 1/1 }}
-            />
+            <Grid size="grow">
+              <Slider
+                value={sfx}
+                onChange={handleSfxChange}
+                aria-labelledby="continuous-slider"
+                min={0}
+                max={100}
+                step={10}
+                marks
+                sx={{ width: 1 / 1 }}
+              />
             </Grid>
             <Grid>
               <VolumeUpIcon />
@@ -133,6 +143,10 @@ export default function Dydy({
         <br />
         <DialogContentText>
           Los controles son WASD, no uses las flechas, no harán nada...
+        </DialogContentText>
+        <br />
+        <DialogContentText>
+          Usa un PC... Es mejor...
         </DialogContentText>
         <br />
         {isHer.is && (
