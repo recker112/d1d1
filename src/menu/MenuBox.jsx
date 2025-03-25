@@ -3,7 +3,9 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-export default function MenuBox({ setView, buttonSfx, mainSong }) {
+import sfxSelected from "../music/sfx_selected.wav";
+
+export default function MenuBox({ setView, buttonSfx, mainSong, sfx }) {
   const [desition, setDesition] = useState(false);
 
   const handleSound = () => {
@@ -13,6 +15,11 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
   const handleView = (view) => {
     if (desition) return;
     setDesition(true);
+
+    const selectedSfx = new Audio(sfxSelected);
+    selectedSfx.play();
+    selectedSfx.volume = sfx / 100;
+
     const fadeOutInterval = setInterval(() => {
       if (mainSong.volume > 0.1) {
         mainSong.volume -= 0.1;
@@ -48,7 +55,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
       <Grid container justifyContent="center" size={12}>
         <Grid>
           <Typography
-            variant="h3"
+            variant="h4"
             sx={{
               color: desition ? "text.disabled" : "error.main",
               cursor: "pointer",
@@ -67,7 +74,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong }) {
         </Grid>
         <Grid>
           <Typography
-            variant="h3"
+            variant="h4"
             sx={{
               color: desition ? "text.disabled" : "primary.main",
               cursor: "pointer",
