@@ -13,9 +13,10 @@ import musEndOfMadness from "../music/mus_madness_end_gift.wav";
 import musDydy from "../music/mus_dydy.wav";
 
 export default function LogroBox({ open, handleClose, mainSong, volume }) {
-  const dydyUnlock = localStorage.getItem('d1d1-yes') === 'completed';
-  const madnessUnlock = localStorage.getItem('d1d1-no') === 'completed';
-  const endUnlock = localStorage.getItem('d1d1-end') === 'completed';
+  console.log(localStorage.getItem('d1d1-end'));
+  const dydyUnlock = JSON.parse(localStorage.getItem('d1d1-yes') || null) === 'completed';
+  const madnessUnlock = JSON.parse(localStorage.getItem('d1d1-no')  || null) === 'completed';
+  const endUnlock = JSON.parse(localStorage.getItem('d1d1-end') || null) === 'completed';
 
   return (
     <Dialog open={open}>

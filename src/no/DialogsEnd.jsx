@@ -16,7 +16,7 @@ export default function DialogsEnd({ sfx }) {
 
   useEffect(() => {
     if (currentDialog === 6 && nextText) {
-      localStorage.setItem('d1d1-end', 'completed');
+      localStorage.setItem('d1d1-end', JSON.stringify("completed"));
       setTimeout(() => {
         window.location.reload();
       }, 4000)

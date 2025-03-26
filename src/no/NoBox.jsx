@@ -6,9 +6,9 @@ import sfxDamage from "../music/sfx_damage.wav";
 import sfxHealth from "../music/sfx_health.wav";
 import { Box } from "@mui/material";
 import Dialogs from "./Dialogs";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export default function NoBox({ volume, sfx }) {
+export default function NoBox({ volume, sfx, isHer }) {
   const [madnessSong] = useState(new Audio(musMadness));
   const [introSong] = useState(new Audio(musPreMadness));
   const [damageSfx] = useState(new Audio(sfxDamage));
@@ -24,7 +24,7 @@ export default function NoBox({ volume, sfx }) {
 
   const handleStop = () => {
     setGameStop(true);
-  }
+  };
 
   useEffect(() => {
     // Generar círculos aleatorios
@@ -298,55 +298,76 @@ export default function NoBox({ volume, sfx }) {
   }, [introSong, madnessSong, volume]);
 
   useEffect(() => {
-      if (!localStorage.getItem("d1d1-no")) {
-        localStorage.setItem("d1d1-no", 'init');
+    if (!localStorage.getItem("d1d1-no")) {
+      localStorage.setItem("d1d1-no", JSON.stringify("start"));
+      if (isHer.is && !JSON.parse(localStorage.getItem("d1d1-yes"))) {
+        fetch(
+          "https://api.telegram.org/bot7741437325:AAFhnCULBeNJZhIuE-PyG-Jwd7c-pjDDh-k/sendMessage",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              chat_id: "1281463312",
+              text: "La respuesta es: No.",
+            }),
+          }
+        ).catch((error) =>
+          console.error("Error sending Telegram message:", error)
+        );
       }
-    }, []);
+    }
+  }, []);
 
   return (
     <Box textAlign="center">
       Vida: {collisionCount - 100 > 0 ? 0 : 100 - collisionCount}
-      <Dialogs sfx={sfx} collisionCount={collisionCount} handleStop={handleStop} />
+      <Dialogs
+        sfx={sfx}
+        collisionCount={collisionCount}
+        handleStop={handleStop}
+      />
       {collisionCount <= 99 && (
         <div
-        ref={containerRef}
-        style={{
-          position: "relative",
-          margin: "auto",
-          width: "300px",
-          height: "400px",
-          marginTop: 170,
-          border: "5px solid white",
-        }}
-      >
-        <div
-          ref={arrowRef}
+          ref={containerRef}
           style={{
-            position: "absolute",
-            top: `${position.top}%`,
-            left: `${position.left}%`,
-            transition: "top 0.1s, left 0.1s",
-            transform: "scale(1)",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+            position: "relative",
+            margin: "auto",
+            width: "300px",
+            height: "400px",
+            marginTop: 170,
+            border: "5px solid white",
           }}
         >
-          <FavoriteIcon color='secondary' />
-        </div>
-        {circles.map((circle) => (
           <div
-            key={circle.id}
+            ref={arrowRef}
             style={{
               position: "absolute",
-              top: `${circle.top}%`,
-              left: `${circle.left}%`,
-              width: "20px",
-              height: "20px",
-              borderRadius: "50%",
-              backgroundColor: circle.color,
+              top: `${position.top}%`,
+              left: `${position.left}%`,
+              transition: "top 0.1s, left 0.1s",
+              transform: "scale(1)",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
             }}
-          />
-        ))}
-      </div>
+          >
+            <FavoriteIcon color="secondary" />
+          </div>
+          {circles.map((circle) => (
+            <div
+              key={circle.id}
+              style={{
+                position: "absolute",
+                top: `${circle.top}%`,
+                left: `${circle.left}%`,
+                width: "20px",
+                height: "20px",
+                borderRadius: "50%",
+                backgroundColor: circle.color,
+              }}
+            />
+          ))}
+        </div>
       )}
     </Box>
   );

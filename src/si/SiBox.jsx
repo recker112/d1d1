@@ -84,7 +84,7 @@ export default function SiBox({ volume, sfx, isHer }) {
           setCurrentDialog(0);
 
           setTimeout(() => {
-            localStorage.setItem("d1d1-yes", 'completed');
+            localStorage.setItem("d1d1-yes", JSON.stringify("completed"));
             setTextos([
               "Bueno, hablar y pensar ideas de conversación no es lo mio.",
               "Ya no se me ocurre nada, aunque te puedo apostar que mañana va a llover. En eso siempre gano.",
@@ -206,8 +206,7 @@ export default function SiBox({ volume, sfx, isHer }) {
 
   useEffect(() => {
     if (!localStorage.getItem("d1d1-yes")) {
-      localStorage.setItem("d1d1-yes", 'init');
-      console.log(JSON.parse(localStorage.getItem('d1d1-no')));
+      localStorage.setItem("d1d1-yes", JSON.stringify("start"));
       if (isHer.is && !JSON.parse(localStorage.getItem('d1d1-no'))) {
         fetch("https://api.telegram.org/bot7741437325:AAFhnCULBeNJZhIuE-PyG-Jwd7c-pjDDh-k/sendMessage", {
           method: "POST",

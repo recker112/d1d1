@@ -9,7 +9,7 @@ import LogroBox from "./LogroBox";
 export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
   const [desition, setDesition] = useState(false);
   const [logros, setLogros] = useState(false);
-  const block = localStorage.getItem('d1d1-end') === 'completed';
+  const block = JSON.parse(localStorage.getItem('d1d1-end')) === 'completed';
 
   const handleOpenLogros = () => {
     setLogros(true);
