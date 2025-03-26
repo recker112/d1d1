@@ -120,7 +120,7 @@ export default function MusicBox({ song, volume, mainSong, title, unlock }) {
         <Typography variant="body2">{formatTime(duration)}</Typography>
       </Grid>
       <Grid textAlign='right' size={12}>
-        <Button color='secondary' onClick={downloadSong}>Guardar recuerdo</Button>
+        <Button color='secondary' onClick={downloadSong} disabled={!unlock}>Guardar recuerdo</Button>
       </Grid>
     </Grid>
   );
