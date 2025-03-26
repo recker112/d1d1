@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuBox from "./menu/MenuBox";
 import { Button, CssBaseline, ThemeProvider } from "@mui/material";
 import Name from "./components/Name";
@@ -8,7 +8,6 @@ import SiBox from "./si/SiBox";
 
 import musIntro from "./music/mus_intro.mp3";
 import sfxButton from "./music/sfx_buttons.wav";
-import NoBox from "./no/NoBox";
 import { shakeText } from "./components/Textos";
 import Intermediario from "./no/Intermediario";
 
@@ -21,6 +20,16 @@ function App() {
   const [volume, setVolume] = useState(10);
   const [sfx, setSfx] = useState(10);
   const [audioInitialized, setAudioInitialized] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    console.log(params);
+    if (params.get("reset") === "true") {
+      localStorage.clear();
+      console.log("LocalStorage cleared due to reset parameter.");
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
 
   const handleVolumeChange = (event, newValue) => {
     setVolume(newValue);

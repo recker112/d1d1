@@ -59,6 +59,7 @@ export default function SiBox({ volume, sfx, isHer }) {
     dydySong.volume = volume / 100;
 
     dydySong.onended = () => {
+      localStorage.setItem("d1d1-yes", JSON.stringify("completed"));
       setTextos([
         "Puedes irte cuando quieras, ¡simplemente recarga la página!",
         "A menos que quieras seguir hablando...",
@@ -84,7 +85,6 @@ export default function SiBox({ volume, sfx, isHer }) {
           setCurrentDialog(0);
 
           setTimeout(() => {
-            localStorage.setItem("d1d1-yes", JSON.stringify("completed"));
             setTextos([
               "Bueno, hablar y pensar ideas de conversación no es lo mio.",
               "Ya no se me ocurre nada, aunque te puedo apostar que mañana va a llover. En eso siempre gano.",
