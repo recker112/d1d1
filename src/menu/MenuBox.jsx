@@ -9,6 +9,7 @@ import LogroBox from "./LogroBox";
 export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
   const [desition, setDesition] = useState(false);
   const [logros, setLogros] = useState(false);
+  const block = localStorage.getItem('d1d1-end') === 'completed';
 
   const handleOpenLogros = () => {
     setLogros(true);
@@ -23,7 +24,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
   };
 
   const handleView = (view) => {
-    if (desition) return;
+    if (desition || block) return;
     setDesition(true);
 
     const selectedSfx = new Audio(sfxSelected);
@@ -67,7 +68,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
           <Typography
             variant="h4"
             sx={{
-              color: desition ? "text.disabled" : "error.main",
+              color: (desition || block) ? "text.disabled" : "error.main",
               cursor: "pointer",
             }}
           >
@@ -86,7 +87,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
           <Typography
             variant="h4"
             sx={{
-              color: desition ? "text.disabled" : "primary.main",
+              color: (desition || block) ? "text.disabled" : "primary.main",
               cursor: "pointer",
             }}
           >
@@ -105,7 +106,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
           <Typography
             variant="h3"
             sx={{
-              color: desition ? "text.disabled" : "primary.main",
+              color: "primary.main",
               cursor: "pointer",
             }}
           >
