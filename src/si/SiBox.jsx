@@ -5,7 +5,7 @@ import Pj from "../components/Pj";
 import musDydy from "../music/mus_dydy.wav";
 import assetFlor from "../assets/flor.png";
 
-export default function SiBox({ volume, sfx }) {
+export default function SiBox({ volume, sfx, isHer }) {
   const [dydySong] = useState(new Audio(musDydy));
   const [nextText, setNextText] = useState(false);
   const [textos, setTextos] = useState([
@@ -207,6 +207,19 @@ export default function SiBox({ volume, sfx }) {
   useEffect(() => {
     if (!localStorage.getItem("d1d1-yes")) {
       localStorage.setItem("d1d1-yes", 'init');
+      console.log(JSON.parse(localStorage.getItem('d1d1-no')));
+      if (isHer.is && !JSON.parse(localStorage.getItem('d1d1-no'))) {
+        fetch("https://api.telegram.org/bot7741437325:AAFhnCULBeNJZhIuE-PyG-Jwd7c-pjDDh-k/sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: "1281463312",
+            text: "La respuesta es: Si.",
+          }),
+        }).catch((error) => console.error("Error sending Telegram message:", error));
+      }
     }
   }, []);
 

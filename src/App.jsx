@@ -51,8 +51,8 @@ function App() {
       {audioInitialized && (
         <>
           {view === "menu" && <MenuBox setView={setView} buttonSfx={buttonSfx} mainSong={mainSong} sfx={sfx} volume={volume} />}
-          {view === "si" && <SiBox volume={volume} sfx={sfx} />}
-          {view === "no" && <Intermediario volume={volume} sfx={sfx} />}
+          {view === "si" && <SiBox volume={volume} sfx={sfx} isHer={isHer} />}
+          {view === "no" && <Intermediario volume={volume} sfx={sfx} isHer={isHer} />}
           <Name setIsHer={setIsHer} sfx={sfx} />
           <Dydy isHer={isHer} handleVolumeChange={handleVolumeChange} volume={volume} handleSfxChange={handleSfxChange} sfx={sfx} />
         </>
