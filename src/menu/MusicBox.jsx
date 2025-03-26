@@ -35,6 +35,8 @@ export default function MusicBox({ song, volume, mainSong, title, unlock }) {
     if (paused) {
       audio.play();
       audio.volume = volume / 100;
+
+      audio.onended = () => togglePlayPause();
       mainSong.pause();
     } else {
       mainSong.play();

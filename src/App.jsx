@@ -10,6 +10,7 @@ import musIntro from "./music/mus_intro.mp3";
 import sfxButton from "./music/sfx_buttons.wav";
 import NoBox from "./no/NoBox";
 import { shakeText } from "./components/Textos";
+import Intermediario from "./no/Intermediario";
 
 function App() {
   const themeConfig = useThemeConf();
@@ -51,7 +52,7 @@ function App() {
         <>
           {view === "menu" && <MenuBox setView={setView} buttonSfx={buttonSfx} mainSong={mainSong} sfx={sfx} volume={volume} />}
           {view === "si" && <SiBox volume={volume} sfx={sfx} />}
-          {view === "no" && <NoBox volume={volume} sfx={sfx} />}
+          {view === "no" && <Intermediario volume={volume} sfx={sfx} />}
           <Name setIsHer={setIsHer} sfx={sfx} />
           <Dydy isHer={isHer} handleVolumeChange={handleVolumeChange} volume={volume} handleSfxChange={handleSfxChange} sfx={sfx} />
         </>
