@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Grid2 as Grid, Slider, IconButton, Typography } from "@mui/material";
+import { Grid2 as Grid, Slider, IconButton, Typography, Button } from "@mui/material";
 import { PlayArrowRounded, PauseRounded } from "@mui/icons-material";
 
 export default function MusicBox({ song, volume, mainSong, title, unlock }) {
@@ -53,6 +53,15 @@ export default function MusicBox({ song, volume, mainSong, title, unlock }) {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
+  const downloadSong = () => {
+    const link = document.createElement("a");
+    link.href = song;
+    link.download = `${title}.wav`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -109,6 +118,9 @@ export default function MusicBox({ song, volume, mainSong, title, unlock }) {
       <Grid container justifyContent="space-between" size={12}>
         <Typography variant="body2">{formatTime(currentTime)}</Typography>
         <Typography variant="body2">{formatTime(duration)}</Typography>
+      </Grid>
+      <Grid textAlign='right' size={12}>
+        <Button color='secondary' onClick={downloadSong}>Guardar recuerdo</Button>
       </Grid>
     </Grid>
   );

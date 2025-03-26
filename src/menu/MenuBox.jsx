@@ -116,7 +116,7 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
               onHoverStart={handleSound}
               onClick={handleOpenLogros}
             >
-              Vault
+              Baúl
             </motion.div>
             <LogroBox open={logros} handleClose={handleCloseLogros} mainSong={mainSong} volume={volume} />
           </Typography>
