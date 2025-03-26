@@ -297,6 +297,12 @@ export default function NoBox({ volume, sfx }) {
     };
   }, [introSong, madnessSong, volume]);
 
+  useEffect(() => {
+      if (!localStorage.getItem("d1d1-no")) {
+        localStorage.setItem("d1d1-no", 'init');
+      }
+    }, []);
+
   return (
     <Box textAlign="center">
       {collisionCount}

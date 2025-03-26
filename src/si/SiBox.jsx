@@ -84,6 +84,7 @@ export default function SiBox({ volume, sfx }) {
           setCurrentDialog(0);
 
           setTimeout(() => {
+            localStorage.setItem("d1d1-yes", 'completed');
             setTextos([
               "Bueno, hablar y pensar ideas de conversación no es lo mio.",
               "Ya no se me ocurre nada, aunque te puedo apostar que mañana va a llover. En eso siempre gano.",
@@ -201,6 +202,12 @@ export default function SiBox({ volume, sfx }) {
       window.removeEventListener("touchmove", handleTouchMove2);
       window.removeEventListener("touchend", handleTouchEnd2);
     };
+  }, []);
+
+  useEffect(() => {
+    if (!localStorage.getItem("d1d1-yes")) {
+      localStorage.setItem("d1d1-yes", 'init');
+    }
   }, []);
 
   return (

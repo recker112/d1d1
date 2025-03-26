@@ -27,6 +27,7 @@ export default function Dialogs({ sfx, collisionCount }) {
       setCurrentDialog(0);
 
       setTimeout(() => {
+        localStorage.setItem("d1d1-no", 'completed');
         window.location.reload();
       }, 44000);
     }

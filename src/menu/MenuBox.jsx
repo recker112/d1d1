@@ -4,9 +4,19 @@ import { motion } from "motion/react";
 import { useState } from "react";
 
 import sfxSelected from "../music/sfx_selected.wav";
+import LogroBox from "./LogroBox";
 
-export default function MenuBox({ setView, buttonSfx, mainSong, sfx }) {
+export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
   const [desition, setDesition] = useState(false);
+  const [logros, setLogros] = useState(false);
+
+  const handleOpenLogros = () => {
+    setLogros(true);
+  }
+
+  const handleCloseLogros = () => {
+    setLogros(false);
+  }
 
   const handleSound = () => {
     buttonSfx.play();
@@ -104,9 +114,11 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx }) {
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 2 }}
               onHoverStart={handleSound}
+              onClick={handleOpenLogros}
             >
-              Logros
+              Vault
             </motion.div>
+            <LogroBox open={logros} handleClose={handleCloseLogros} mainSong={mainSong} volume={volume} />
           </Typography>
         </Grid>
       </Grid>

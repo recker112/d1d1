@@ -50,7 +50,7 @@ function App() {
       {audioInitialized && (
         <>
           DEBUG: {view}
-          {view === "menu" && <MenuBox setView={setView} buttonSfx={buttonSfx} mainSong={mainSong} sfx={sfx} />}
+          {view === "menu" && <MenuBox setView={setView} buttonSfx={buttonSfx} mainSong={mainSong} sfx={sfx} volume={volume} />}
           {view === "si" && <SiBox volume={volume} sfx={sfx} />}
           {view === "no" && <NoBox volume={volume} sfx={sfx} />}
           <Name setIsHer={setIsHer} sfx={sfx} />
