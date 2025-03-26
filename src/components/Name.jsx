@@ -11,6 +11,7 @@ export default function Name({ setIsHer, sfx }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (e.target.name.value === '') return;
     setOpen(false);
 
     const name = e.target.name.value.toLowerCase();
