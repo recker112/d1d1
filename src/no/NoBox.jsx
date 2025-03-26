@@ -305,7 +305,7 @@ export default function NoBox({ volume, sfx }) {
 
   return (
     <Box textAlign="center">
-      {collisionCount}
+      Vida: {collisionCount - 100 > 0 ? 0 : 100 - collisionCount}
       <Dialogs sfx={sfx} collisionCount={collisionCount} handleStop={handleStop} />
       {collisionCount <= 99 && (
         <div
