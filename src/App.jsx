@@ -26,7 +26,6 @@ function App() {
     console.log(params);
     if (params.get("reset") === "true") {
       localStorage.clear();
-      console.log("LocalStorage cleared due to reset parameter.");
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
