@@ -38,7 +38,6 @@ export default function Dialogs({ sfx, collisionCount }) {
       const changeText = async () => {
         await new Promise((resolve) =>
           setTimeout(() => {
-            console.log("NEXT");
             setNextText(false);
             setCurrentDialog((prev) => prev + 1);
             resolve();
@@ -47,7 +46,6 @@ export default function Dialogs({ sfx, collisionCount }) {
       };
   
       if (nextText) {
-        console.log("Texto terminado.");
         changeText();
       }
     }, [nextText]);

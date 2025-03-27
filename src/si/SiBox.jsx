@@ -39,7 +39,6 @@ export default function SiBox({ volume, sfx, isHer }) {
     const changeText = async () => {
       await new Promise((resolve) =>
         setTimeout(() => {
-          console.log("NEXT");
           setNextText(false);
           setCurrentDialog((prev) => prev + 1);
           resolve();
@@ -48,7 +47,6 @@ export default function SiBox({ volume, sfx, isHer }) {
     };
 
     if (nextText) {
-      console.log("Texto terminado.");
       changeText();
     }
   }, [nextText]);

@@ -3,8 +3,9 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-import sfxSelected from "../music/sfx_selected.wav";
 import LogroBox from "./LogroBox";
+import sfxSelected from "../music/sfx_selected.wav";
+import sfxLock from "../music/sfx_lock.wav";
 
 export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
   const [desition, setDesition] = useState(false);
@@ -24,6 +25,13 @@ export default function MenuBox({ setView, buttonSfx, mainSong, sfx, volume }) {
   };
 
   const handleView = (view) => {
+    if (block) {
+      const lockSfx = new Audio(sfxLock);
+
+      lockSfx.play();
+      lockSfx.volume = sfx / 100;
+    }
+
     if (desition || block) return;
     setDesition(true);
 
