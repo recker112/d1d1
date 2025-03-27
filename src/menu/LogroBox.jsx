@@ -8,12 +8,11 @@ import {
 } from "@mui/material";
 import MusicBox from "./MusicBox";
 
-import musMadness from "../music/mus_madness.wav";
+import musMadness from "../music/mus_madness_gift.wav";
 import musEndOfMadness from "../music/mus_madness_end_gift.wav";
 import musDydy from "../music/mus_dydy.wav";
 
 export default function LogroBox({ open, handleClose, mainSong, volume }) {
-  console.log(localStorage.getItem('d1d1-no'));
   const dydyUnlock = JSON.parse(localStorage.getItem('d1d1-yes')) === 'completed';
   const madnessUnlock = JSON.parse(localStorage.getItem('d1d1-no')) === 'completed';
   const endUnlock = JSON.parse(localStorage.getItem('d1d1-end')) === 'completed';
