@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Grid2 as Grid, Slider, IconButton, Typography, Button } from "@mui/material";
 import { PlayArrowRounded, PauseRounded } from "@mui/icons-material";
 
-export default function MusicBox({ song, volume, mainSong, title, unlock }) {
+export default function MusicBox({ song, volume, mainSong, title, unlock, fear = false, handle = () => {} }) {
   const [paused, setPaused] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -32,7 +32,12 @@ export default function MusicBox({ song, volume, mainSong, title, unlock }) {
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
+
     if (paused) {
+      if (fear && !JSON.parse(localStorage.getItem('d1d1-fear'))) {
+        localStorage.setItem('d1d1-fear', JSON.stringify(true));
+        handle();
+      }
       audio.play();
       audio.volume = volume / 100;
 
